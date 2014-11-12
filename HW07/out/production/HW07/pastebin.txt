@@ -1,0 +1,343 @@
+
+
+//    private int height(Node<T> parent) {
+//        if (parent == null) {
+//            return -1;
+//        }
+//        return 1 + Math.max(height(root.getRight()), height(root.getLeft()));
+//    }
+
+
+//    private Node<T> insertAVL(Node<T> root, Node<T> grandparent, Node<T> node) {
+//        // if root is null, return node
+//        // if node < root
+//        //  root.left = insertAVL root.getLeft
+//        //  if !isAVL(root)
+//        //      fixAVL
+//        //  root.right = insertAVL root.getRight
+//        //  if !isAVL(root)
+//        //      fixAVL
+//
+//        if (root == null) {
+//            return node;
+//        }
+//
+//        int compare = node.getData().compareTo(root.getData());
+//        if (compare < 0) { // node < root
+//            root.setLeft(insertAVL(root.getLeft(), root, node));
+//            if (!isAVL(root)) {
+//                if (root.getLeft().getBalanceFactor() >= 0) {
+//                    Node<T> newParent = new Node<T>(root.getLeft().getData());
+//                    newParent.setLeft(root.getLeft().getLeft());
+//                    newParent.setRight(new Node<T>(root.getData()));
+//
+//                    newParent.getRight().setLeft(root.getLeft().getLeft());
+//                    newParent.getRight().setRight(root.getRight());
+//
+//                    if (grandparent.getLeft() == root) {
+//                        grandparent.setLeft(newParent);
+//                        root = newParent;
+//                    } else {
+//                        grandparent.setRight(newParent);
+//                        root = newParent;
+//                    }
+//                } else {
+//                    // x's right child is left heavy - double rotation
+//                    Node<T> newParent = new Node<T>(root.getLeft().getRight().getData());
+//                    newParent.setLeft(root.getLeft());
+//                    newParent.setRight(new Node<T>(root.getData()));
+//
+//                    newParent.getLeft().setLeft(root.getLeft().getLeft());
+//                    newParent.getLeft().setRight();
+//
+//                    newParent.getRight().setLeft();
+//                    newParent.getRight().setRight();
+//
+//                    if (grandparent.getLeft() == root) {
+//                        grandparent.setLeft(newParent);
+//                        root = newParent;
+//                    } else {
+//                        grandparent.setRight(newParent);
+//                        root = newParent;
+//                    }
+//                }
+//            }
+//            return root;
+//        } else if (compare > 0) { // node > root
+//            root.setRight(insertAVL(root.getRight(), root, node));
+//            if (!isAVL(root)) {
+//                if (root.getRight().getBalanceFactor() <= 0) {
+//                    // x's right child is right heavy or balanced
+//                    Node<T> newParent = new Node<T>(root.getRight().getData());
+//                    newParent.setLeft(new Node<T>(root.getData()));
+//                    newParent.setRight(root.getRight().getRight());
+//
+//                    newParent.getLeft().setLeft(root.getLeft());
+//                    newParent.getLeft().setRight(root.getRight().getLeft());
+//
+//                    if (grandparent.getLeft() == root) {
+//                        grandparent.setLeft(newParent);
+//                        root = newParent;
+//                    } else {
+//                        grandparent.setRight(newParent);
+//                        root = newParent;
+//                    }
+//                } else {
+//                    // x's right child is left heavy - double rotation
+//                    Node<T> newParent = new Node<T>(root.getRight().getLeft().getData());
+//                    newParent.setLeft(new Node<T>(root.getData()));
+//                    newParent.setRight(new Node<T>(root.getRight().getData()));
+//
+//                    newParent.getLeft().setLeft(root.getLeft());
+//                    newParent.getLeft().setRight(root.getRight().getLeft().getLeft());
+//
+//                    newParent.getRight().setLeft(root.getRight().getLeft().getRight());
+//                    newParent.getRight().setRight(root.getRight().getRight());
+//
+//                    if (grandparent.getLeft() == root) {
+//                        grandparent.setLeft(newParent);
+//                        root = newParent;
+//                    } else {
+//                        grandparent.setRight(newParent);
+//                        root = newParent;
+//                    }
+//                }
+//            }
+//            return root;
+//        } else { // duplicate node == root
+//            return root;
+//        }
+//    }
+
+
+    private boolean isAVL(Node<T> root) {
+        int delta = 0;
+        if (root.getLeft() != null) {
+            delta += root.getLeft().getHeight();
+        }
+//        if (root.getRight() != null)
+        return false;
+    }
+
+
+//    private Node<T>[] insertBST(Node<T> current, T data) {
+//        Node<T> parent = null, grandparent = null;
+//        boolean done = false;
+//        Node<T>[] result = (Node<T>[]) new Object[3];
+//
+//        while (!done) {
+//            int compare = data.compareTo(current.getData());
+//            if (compare == 0) {
+//                // duplicate item? do nothing
+//                done = true;
+//                current = null;
+//
+//            } else if (compare < 0) {
+//                if (current.getLeft() == null) {
+//                    // create node
+//                    current.setLeft(new Node<T>(data));
+//                    done = true;
+//                } else {
+//                    grandparent = parent;
+//                    parent = current;
+//                    current = current.getLeft();
+//                }
+//            } else {
+//                if (current.getRight() == null) {
+//                    // create node
+//                    current.setRight(new Node<T>(data));
+//                    done = true;
+//                } else {
+//                    grandparent = parent;
+//                    parent = current;
+//                    current = current.getRight();
+//                }
+//            }
+//        }
+//
+//        return result;
+//    }
+
+//    private Node<T> insertAVL(Node<T> parent, Node<T> grandParent, Node<T> node) {
+//        Node<T> result = null;
+//
+//        if (parent == null) {
+//            result = node;
+//        } else if (!parent.getData().equals(node.getData())) {
+//            if (node.getData().compareTo(parent.getData()) < 0) {
+//                // node < parent
+//                parent = insertAVL(parent.getLeft(), parent, node);
+//                if (parent.getLeft().getHeight() - parent.getRight().getHeight() > 1) {
+//                    if (grandParent.getLeft() == parent) { // single rotate
+//                        // rotate left parent
+//                        /*
+//                                O grandparent                               O parent
+//                               /                                           / \
+//                              O   parent          =>       parent.getLeft O   O grandparent
+//                             /
+//                            O     parent.getLeft
+//                         */
+//                        Node<T> newParent = new Node<T>(parent.getData());
+//                        newParent.setLeft(parent.getLeft());
+//                        newParent.setRight(grandParent);
+//
+//                        grandParent.setLeft(parent.getRight());
+//                    } else {
+//                        // double rotate left parent
+//                        /*
+//                            O grandparent                                  O parent.getLeft
+//                             \                                            / \
+//                              O   parent          =>         grandparent O   O parent
+//                             /
+//                            O     parent.getLeft
+//                         */
+//
+//                    }
+//                }
+//            } else {
+//                parent = insertAVL(parent.getRight(), parent, node);
+//                if (parent.getRight().getHeight() - parent.getLeft().getHeight() > 1) {
+//
+//                }
+//            }
+////            calculateHeight(parent);
+//            result = parent;
+//        }
+//
+//        return result;
+//    }
+
+
+
+
+//    private Node<T> remove(T data, Node<T> parent, Node<T> grandparent, Node<T> toReturn) {
+//        if (parent == null) {
+//            // reached null node...
+//            return null;
+//        } else if (data.compareTo(parent.getData()) < 0) {          // go left
+//            Node<T> left = remove(data, parent.getLeft(), parent, toReturn);
+//            if (left != null) {
+//                parent.setLeft(left);
+//            } else {
+//                return null;
+//            }
+//        } else if (data.compareTo(parent.getData()) > 0) {          // go right
+//            Node<T> right = remove(data, parent.getRight(), parent, toReturn);
+//            if (right != null) {
+//                parent.setRight(right);
+//            }
+//        } else {                                                    // equal
+//            size--;
+//
+//            // case 1: leaf
+//            if (parent.getLeft() == null && parent.getRight() == null) {
+//                if (removeLeafBST(data, parent, grandparent, toReturn)) {
+//                    return null; // null grandparent
+//                }
+//                // TODO rebalance
+//            }
+//
+//            // case 2: one child
+//             else if (parent.getLeft() == null || parent.getRight() == null) {
+//                // BST remove one node...
+//                removeOneChildBST(data, parent, toReturn);
+//                // TODO rebalance
+//            }
+//
+//            // case 3: two children :P
+//            else {
+//                removeTwoChildrenBST(data, parent, grandparent, toReturn);
+//                // TODO rebalance
+//            }
+//        }
+//
+//        if (parent != null) {
+//            parent.setHeight(calcHeight(parent));
+//            parent.setBalanceFactor(height(parent.getLeft()) - height(parent.getRight()));
+//        }
+//
+//        return parent;
+//    }
+//
+//    private void removeOneChildBST(T data, Node<T> parent, Node<T> toReturn) {
+//        // TODO check if root...
+//        toReturn.setData(parent.getData());
+//        if (parent.getRight() == null) { // left
+//            parent.setData(parent.getLeft().getData());
+//            parent.setLeft(parent.getLeft().getLeft());
+//            parent.setRight(parent.getLeft().getRight());
+//        } else { // right
+//            parent.setData(parent.getRight().getData());
+//            parent.setLeft(parent.getRight().getLeft());
+//            parent.setRight(parent.getRight().getRight());
+//        }
+//    }
+//
+//    private boolean removeLeafBST(T data, Node<T> parent, Node<T> grandparent, Node<T> toReturn) {
+//        // detach left node
+//        toReturn.setData(parent.getData());
+//        if (grandparent != null && grandparent.getLeft() != null
+//                && grandparent.getLeft().getData().equals(data)) {
+//            grandparent.setLeft(null);
+//        }
+//
+//        // detach right node
+//        else if (grandparent != null) {
+//            grandparent.setRight(null);
+//        }
+//
+//        else {
+//            // TODO grandparent is null.... :P
+//            return false;
+//        }
+//
+//        return true;
+//    }
+//
+//    private boolean removeTwoChildrenBST(T data, Node<T> parent, Node<T> grandparent, Node<T> toReturn) {
+//        Node<T> pred = curr.getLeft();
+//        Node<T> predParent = null;
+//        while (pred.getRight() != null) {
+//            predParent = pred;
+//            pred = pred.getRight();
+//        }
+//        T ret = pred.getData();
+//        if (predParent == null) {
+//            curr.setLeft(pred.getLeft());
+//        }
+//        else {
+//            predParent.setRight(pred.getLeft());
+//        }
+//        return ret;
+//    }
+
+    /*
+
+        if (parent == null) {
+            parent = new Node<T>(data);
+        } else if (data.compareTo(parent.getData()) < 0) {
+            parent.setLeft(add(data, parent.getLeft()));
+            parent.setBalanceFactor(height(parent.getLeft()) - height(parent.getRight()));
+            if (Math.abs(parent.getBalanceFactor()) > 1) {
+                if (data.compareTo(parent.getLeft().getData()) < 0) {
+                    parent = rotateleft(parent);
+                } else {
+                    parent = rotatetwiceleft(parent);
+                }
+            }
+        } else if (data.compareTo(parent.getData()) > 0) {
+            parent.setRight(add(data, parent.getRight()));
+            parent.setBalanceFactor(height(parent.getLeft()) - height(parent.getRight()));
+            if (Math.abs(parent.getBalanceFactor()) > 1) {
+                if (data.compareTo(parent.getRight().getData()) > 0) {
+                    parent = rotateright(parent);
+                } else {
+                    parent = rotatetwiceright(parent);
+                }
+            }
+        }
+
+        parent.setHeight(calcHeight(parent));
+        parent.setBalanceFactor(height(parent.getLeft()) - height(parent.getRight()));
+        return parent;
+     */

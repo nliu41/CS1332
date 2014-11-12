@@ -1,0 +1,80 @@
+- read libraries
+- practice edge cases: look at conditionals
+
+- use clear helper functions
+- use library functions if allowed
+- ask them if you are stuck
+- tell them working solution, then optimize it
+
+- asked enough clarifying questions
+- mentioned runtime complexity
+- checked bounds
+- considered edge cases
+- test cases
+- is this the most appropriate data structure
+    - ask if it can be stored in memory
+    - ask if null, ask if 2d array is jagged
+    - data structs, can I use getters or setters, etc
+
+Technical Questions:
+- array n ints, find duplicate
+- given two 2d arrays write a program that multiplies them together and returns their product
+public int[][] function(int[][] a, int[][] b) {
+
+    if (a == null || b == null || a.length == 0 || b.length == 0) return null;
+    if (a[0].length != b.length) return null;
+
+    int rows =
+    int cols = b[0];
+    int[][] result = new int[rows][cols];
+
+    for (int i = 0; i < rows; i++
+
+}
+
+- word reversal in a sentence
+public char[] reverse(char[] arr) {
+    if (arr == null || arr.length < 1) return null;
+
+    int high, low;
+
+    for(int i = 0; i < arr.length; i++) {
+
+    }
+}
+
+- String to int
+    - if negative, do shit
+    - if zero, do shit
+    - empty string
+    - spaces
+public int strToInt(String s) {
+
+    int result = 0;
+
+    int negative = 1;
+    if (s.charAt(0) == '-') {
+        negative = -1;
+    }
+    for (int i = 0; i < s.length(); i++) {
+        else {
+            result += Math.pow(10, 10)
+        }
+    }
+}
+
+
+- Intersection and union
+    - learn about arrays
+
+
+- Find cycle in linkedlist
+
+
+
+Interview resources
+===================
+Dynamic programing
+- TopCoder
+- Skiena Algorishm Design Manual
+- Project Euler

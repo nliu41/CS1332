@@ -1,0 +1,71 @@
+
+    /**
+     * prunes the skip list to remove empty levels
+     */
+    private void pruneLevels() {
+        if (height > 1 && head.getNext().getData() == null) {
+            Node<T> origHead = head;
+
+            head = head.getDown();
+            head.setUp(null);
+            head.getNext().setUp(null);
+
+            origHead.setUp(null);
+            origHead.setDown(null);
+            origHead.getNext().setUp(null);
+            origHead.getNext().setDown(null);
+            origHead.setNext(null);
+
+            height--;
+
+            pruneLevels();
+        }
+    }
+
+
+    private Node<T> getPredecessorOnRow(T data, int heightToPut) {
+        int currentHeight = height;
+        boolean done = false;
+
+        Node<T> parent = head;
+
+        while (!done) {
+            parent = traverseAndFindPredecessor(data, head);
+            if (currentHeight == heightToPut && parent != null) {
+                // current row matches height to put!
+                done = true;
+            } else if () {
+
+            }
+        }
+
+        return parent;
+    }
+
+
+        /**
+         * Finds the predecessor on the row below the parent
+         * @param data data to search for
+         * @param parent parent to search below
+         * @return the predecessor node
+         */
+        private Node<T> traverseAndFindPredecessor(T data, Node<T> parent) {
+
+        }
+
+
+            private Node<T> get(Node<T> parent, T data) {
+                Node<T> pred = getPredecessorGivenSentinel(data, parent);
+
+                Node<T> returnValue = null;
+
+                if (pred != null && pred.getNext() != null
+                        && pred.getNext().getData() != null) { // check if next is equal else go down a level
+                    if (pred.getNext().getData().equals(data)) {
+                        returnValue = pred;
+                    } else if (pred.getDown() != null) { // if we can go down a level
+                        returnValue = get(pred.getDown(), data);
+                    }
+                }
+                return returnValue;
+            }

@@ -5,7 +5,6 @@
  * @version 1.0
  */
 public class Stack<T> implements StackInterface<T> {
-
     private LinkedListInterface<T> stack;
 
     public Stack() {
@@ -31,7 +30,5 @@ public class Stack<T> implements StackInterface<T> {
     public boolean isEmpty() {
         return stack.isEmpty();
     }
-
-
 
 }

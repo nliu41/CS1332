@@ -5,7 +5,6 @@
  * @version 1.0
  */
 public class Queue<T> implements QueueInterface<T> {
-
     private LinkedListInterface<T> queue;
 
     public Queue() {

@@ -1,0 +1,137 @@
+//    @Override
+//    public T remove(T data) {
+//        // case with two children (10)
+//        //   Node pred = findPredecessor(current) - swap node to delete with predecessor
+//        //   swap data of node to remove with predecessor
+//        //   remove old predecessor (either 1 left child or no children)
+//        if (size == 0 || (size == 1 && root.getData() != data)) {
+//            return null; // no data found in tree (empty) or single node that does not match the data to remove
+//        } else if (size == 1) {
+//            T temp = root.getData();
+//            clear(); // must match the root
+//            return temp;
+//        } else { // more than one node in the tree... send off to recursive helper
+//            return removeHelper(root, data);
+//        }
+//    }
+//
+//
+//    private T removeHelper(Node<T> parent, T data) {
+//        int compare = parent.getData().compareTo(data);
+//
+//        if (compare > 0) { // data < root; left
+//            if (parent.getLeft().getData().equals(data)) {
+//                return removeHelperNode(parent, -1);
+//            } else {
+//                return removeHelper(parent.getLeft(), data);
+//            }
+//        } else if (compare < 0) {
+//            if (parent.getRight().getData().equals(data)) {
+//                return removeHelperNode(parent, 1);
+//            } else {
+//                return removeHelper(parent.getRight(), data);
+//            }
+//        } else {
+//            // equal... inconsistent state
+//            throw new IllegalStateException();
+//        }
+//
+////        if (compare > 0) { // compare to, node > data
+////            removeHelper(root.getLeft(), data);
+////        } else if (compare < 0) { // node < data
+////            removeHelper(root.getRight(), data);
+////        } else { // equal!
+////            if (base.getRight() == null && base.getLeft() == null) { // if leaf
+////                T temp = base.getData();
+////
+////                return temp;
+////            }
+////        }
+////        return null;
+////        if (base.getLeft() == null && base.getRight() == null) { // if leaf...
+////           if (base.getData() == data) {
+////                T temp = base.getData();
+////                base = null;
+////                return temp;
+////           } else {
+////                return null;
+////           }
+////        } else if (base.getLeft() == null || base.getRight() == null) { // only has left node, right node - one child...
+////            Node<T> child = base.getLeft();
+////            if (child == null) child = base.getRight();
+////
+////            if (base.getData() == data) {
+////                // remove base, add left or right
+////            } else {
+////
+////            }
+////        } else {
+////            // if left or right...
+////            int compare = base.getData().compareTo(data);
+////
+////            if (compare > 0) { // compare to, node > data
+////                removeHelper(base.getLeft(), data);
+////            } else if (compare < 0) { // node < data
+////                removeHelper(base.getLeft(), data);
+////            } else {
+////                // equal!
+////                // :P not a leaf... ???
+////            }
+////            if removeHelper(base.getLeft(), data);
+////
+////        }
+//    }
+//
+//    private T removeHelperNode(Node<T> parent, int direction) {
+//        // leaf, 1 child, 2 children
+//        Node<T> item = parent.getLeft();
+//        if (direction > 0) item = parent.getRight();
+//
+//        if (item.getLeft() == null && item.getRight() == null) { // leaf
+//            T temp = item.getData();
+//            if (direction < 0) {
+//                parent.setLeft(null);
+//            } else {
+//                parent.setRight(null);
+//            }
+//            return temp;
+//        } else if (item.getLeft() != null && item.getRight() == null) { // left tree only, single child; promote child
+//            T temp = item.getData();
+//            if (direction < 0) {
+//                parent.setLeft(item.getLeft());
+//            } else {
+//                parent.setRight(item.getLeft());
+//            }
+//            return temp;
+//        } else if (item.getRight() != null && item.getLeft() == null) { // right tree only, single child; promote tree
+//            T temp = item.getData();
+//            if (direction < 0) {
+//                parent.setLeft(item.getRight());
+//            } else {
+//                parent.setRight(item.getRight());
+//            }
+//            return temp;
+//        } else { // two subtrees
+//
+//            Node<T> prevParent = parent;
+//            Node<T> parentsearch = prevParent.getLeft();
+//            boolean looped = false;
+//            while (parentsearch.getRight() != null) {
+//                prevParent = parent;
+//                parentsearch = parent.getRight();
+//                looped = true;
+//            }
+//
+//            T temp = item.getData();
+//            item.setData(parentsearch.getData());
+//
+//            if (looped) {
+//                prevParent.setRight(parentsearch.getLeft());
+//            } else {
+//                prevParent.setLeft(parentsearch.getLeft());
+//            }
+//
+//            return temp;
+//
+//        }
+//    }

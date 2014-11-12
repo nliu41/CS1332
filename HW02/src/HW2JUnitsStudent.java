@@ -7,7 +7,7 @@ import org.junit.Before;
 
 /**
  * Student JUnits for HW02
- * @version 1.0
+ * @version 1.1
  * @author Albert Shaw
  */
 public class HW2JUnitsStudent {
@@ -283,7 +283,7 @@ public class HW2JUnitsStudent {
             assertEquals(head.getData(), array[0]);
             Node<Integer> current = head;
             Node<Integer> next = head;
-            for (int x = 0; x < list.size(); x++) {
+            for (int x = 0; x < array.length; x++) {
                 current = next;
                 assertEquals(current.getData(), array[x]);
                 next = current.getNext();
@@ -292,13 +292,13 @@ public class HW2JUnitsStudent {
 
             current = tail;
             next = tail;
-            for (int x = list.size() - 1; x >= 0; x--) {
+            for (int x = array.length - 1; x >= 0; x--) {
                 current = next;
                 assertEquals(current.getData(), array[x]);
                 next = current.getPrevious();
             }
             assertTrue(current == head);
-            assertEquals(tail.getData(), array[list.size() - 1]);
+            assertEquals(tail.getData(), array[array.length - 1]);
             assertTrue(head.getPrevious() == null);
             assertTrue(tail.getNext() == null);
         }

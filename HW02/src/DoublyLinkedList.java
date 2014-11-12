@@ -6,14 +6,16 @@
 
 public class DoublyLinkedList<T> implements LinkedListInterface<T> {
 
-    private Node head, tail;
+    private Node<T> head, tail;
     private int size;
 
     @Override
     public void addAtIndex(int index, T data) {
-        if (index < 0 || index > size) { // should also include empty array edge case
+        // should also include empty array edge case
+        if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException("Index out of bounds of list");
-        } else if (index == 0) {  // shortcut for beginning or end
+        } else if (index == 0) {
+            // shortcut for beginning or end
             addToFront(data);
         } else if (index == size) {
             addToBack(data);
@@ -38,18 +40,28 @@ public class DoublyLinkedList<T> implements LinkedListInterface<T> {
 
     @Override
     public T get(int index) {
-        if (index < 0 || index >= size) { // should also include empty array edge case
+        // should also include empty array edge case
+        if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index out of bounds of list");
         }
         return getIndex(index).getData();
     }
 
 
-    /* TODO comment */
+    /**
+     * Gets an item at a particular index, returning a Node<T>
+     *
+     * O(1) for i=0, size-1
+     * O(n) for other items
+     *
+     * @return Node representing the item at index passed to the method
+     */
     private Node<T> getIndex(int index) {
-        if (index < 0 || index >= size) { // should also include empty array edge case
+        // should also include empty array edge case
+        if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index out of bounds of list");
-        } else if (index == 0) {  // shortcut for beginning or end
+        } else if (index == 0) {
+            // shortcut for beginning or end
             return head;
         } else if (index == size - 1) {
             return tail;
@@ -71,9 +83,11 @@ public class DoublyLinkedList<T> implements LinkedListInterface<T> {
 
     @Override
     public T removeAtIndex(int index) {
-        if (index < 0 || index >= size) { // should also include empty array edge case
+        // should also include empty array edge case
+        if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index out of bounds of list");
-        } else if (index == 0) {  // shortcut for beginning or end
+        } else if (index == 0) {
+            // shortcut for beginning or end
             return removeFromFront();
         } else if (index == size - 1) {
             return removeFromBack();
@@ -97,7 +111,8 @@ public class DoublyLinkedList<T> implements LinkedListInterface<T> {
 
     @Override
     public void addToFront(T t) {
-        if (isEmpty()) { // if empty, create a new list
+        // if empty, create a new list
+        if (isEmpty()) {
             addEmptyList(t);
         } else {
             Node<T> oldHead = head;
@@ -110,7 +125,8 @@ public class DoublyLinkedList<T> implements LinkedListInterface<T> {
 
     @Override
     public void addToBack(T t) {
-        if (isEmpty()) { // if empty, create a new list
+        // if empty, create a new list
+        if (isEmpty()) {
             addEmptyList(t);
         } else {
             Node<T> oldTail = tail;
@@ -122,14 +138,16 @@ public class DoublyLinkedList<T> implements LinkedListInterface<T> {
     }
 
     /**
-     * Adds an item to an empty list, ensuring that head and tail are correctly set
+     * Adds an item to an empty list, ensuring that head and tail
+     * are correctly set
      *
      * Must be O(1)
      */
-    private void addEmptyList(T t) { // node that has a next that points to itself
+    private void addEmptyList(T t) {
+        // node that has a next that points to itself
         Node<T> temp = new Node<T>(t);
-        temp.setNext(null);
-        temp.setPrevious(null);
+        temp.setNext(null); // should be by default
+        temp.setPrevious(null); // just in case
         head = temp;
         tail = temp;
         changeSize(1);
@@ -140,7 +158,8 @@ public class DoublyLinkedList<T> implements LinkedListInterface<T> {
         Node<T> removednode = head;
         if (isEmpty()) {
             return null;
-        } else if (size() == 1) { // edge case - single item in list
+        } else if (size() == 1) {
+            // edge case - single item in list
             clear();
         } else { // normal list
             Node<T> oldHead = head;
@@ -161,7 +180,8 @@ public class DoublyLinkedList<T> implements LinkedListInterface<T> {
         Node<T> removednode = tail;
         if (isEmpty()) {
             return null;
-        } else if (size() == 1) { // edge case - single item in list
+        } else if (size() == 1) {
+            // edge case - single item in list
             clear();
         } else { // normal list
             Node<T> oldTail = tail;
@@ -178,8 +198,8 @@ public class DoublyLinkedList<T> implements LinkedListInterface<T> {
     }
 
     @Override
-    public T[] toArray() {
-        T[] list = (T[]) new Object[size()];
+    public Object[] toArray() {
+        Object[] list = new Object[size()];
 
         Node<T> current = head;
 
@@ -189,7 +209,7 @@ public class DoublyLinkedList<T> implements LinkedListInterface<T> {
 
         int i = 0;
         do {
-            list[i] = (T) current.getData();
+            list[i] = current.getData();
             i++;
             current = current.getNext();
         } while (current != null);
@@ -215,8 +235,10 @@ public class DoublyLinkedList<T> implements LinkedListInterface<T> {
     }
 
     /**
-     * Updates the size of the linked list. Changes to size are in a separate method to allow easier debugging and also
-     * to allow checking to see if the list should be cleared to clean up head and tail references.
+     * Updates the size of the linked list. Changes to size are in a
+     * separate method to allow easier debugging and also to allow
+     * checking to see if the list should be cleared to clean up head
+     * and tail references.
      *
      * Must be O(1)
      *
