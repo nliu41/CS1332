@@ -6,14 +6,19 @@ public class StringSearching implements StringSearchingInterface {
     @Override
     public List<Integer> boyerMoore(CharSequence pattern,
                                     CharSequence text) {
-        if (pattern == null || pattern.length() < 1
-                || text == null || pattern.length() > text.length()) {
-            throw new IllegalArgumentException();
-        }
+
+        // If the pattern is null or of length 0,
+        //      throw an IllegalArgumentException.
+        // If the text is null, throw an IllegalArgumentException.
+        // If the text is of length 0, return an empty list.
 
         List<Integer> result = new ArrayList<Integer>();
 
-        if (text.length() > 0) {
+        if (pattern == null || pattern.length() < 1
+                || text == null) {
+            throw new IllegalArgumentException();
+        } else if (text.length() > 0
+                && pattern.length() <= text.length()) {
             boyerMoore(pattern, text, result);
         }
 
@@ -77,14 +82,14 @@ public class StringSearching implements StringSearchingInterface {
     @Override
     public List<Integer> rabinKarp(CharSequence pattern,
                                    CharSequence text) {
-        if (pattern == null || pattern.length() < 1
-                || text == null || pattern.length() > text.length()) {
-            throw new IllegalArgumentException();
-        }
 
         List<Integer> result = new ArrayList<Integer>();
 
-        if (text.length() > 0) {
+        if (pattern == null || pattern.length() < 1
+                || text == null) {
+            throw new IllegalArgumentException();
+        } else if (text.length() > 0
+                && pattern.length() <= text.length()) {
             rabinKarp(pattern, text, result);
         }
 
@@ -172,6 +177,7 @@ public class StringSearching implements StringSearchingInterface {
                     int last = lastTable[currentChar] + 1;
                     i += pattern.length() - Math.min(j, last);
                     j = pattern.length() - 1;
+
                 } else {
                     i--;
                     j--;
